@@ -2,22 +2,18 @@ package main
 
 import (
 	"github.com/philborlin/ead/cmds"
-	"github.com/prometheus/common/log"
+	"github.com/philborlin/ead/stack"
 )
 
 func main() {
-	stack := stack()
+	stack := stack.NewStack()
+	time := cmds.NewTimeCmds(stack)
+	rnd := cmds.NewRandCmds(stack)
+	log := cmds.NewLoggingCmds(stack)
 
-	kafka.Append(nil)
-	id := sql.Insert("INSERT INFO foo (bar) VALUES (?);", "qux")
-	log.Info("Last id: %d", id)
+	i := rnd.Int()
+	t := time.Now()
+	log.Info("Rand: %d @ %v", i, t)
 
 	stack.Interpret()
-}
-
-func stack() *Stack {
-	stack := cmds.NewStack()
-	kafka := cmds.NewKafkaCmds(stack)
-	log := cmds.NewLoggingCmds(stack)
-	sql := cmds.NewSQLCmds(stack)
 }

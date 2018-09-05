@@ -1,4 +1,4 @@
-package cmds
+package stack
 
 // Stack contains cmds
 type Stack struct {

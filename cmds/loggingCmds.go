@@ -1,8 +1,10 @@
 package cmds
 
+import "github.com/philborlin/ead/stack"
+
 // LoggingCmds represents a Kafka command creator
 type LoggingCmds struct {
-	stack *Stack
+	stack *stack.Stack
 }
 
 // InfoCmd represents an insert command
@@ -12,13 +14,11 @@ type InfoCmd struct {
 }
 
 // Info logs at the info level
-func (c *LoggingCmds) Info(format string, a ...interface{}) int {
-	i := new(int)
+func (c *LoggingCmds) Info(format string, a ...interface{}) {
 	c.stack.AddCmd <- InfoCmd{format, a}
-	return *i
 }
 
 // NewLoggingCmds creates a LoggingCmds
-func NewLoggingCmds(stack *Stack) *LoggingCmds {
+func NewLoggingCmds(stack *stack.Stack) *LoggingCmds {
 	return &LoggingCmds{stack}
 }
