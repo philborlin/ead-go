@@ -1,9 +1,13 @@
 package stack
 
+// Interpreter has a single method Interpret
+type Interpreter interface {
+	Interpret() error
+}
+
 // Stack contains cmds
 type Stack struct {
-	cmds   []interface{}
-	AddCmd chan<- interface{}
+	cmds []Interpreter
 }
 
 // NewStack creates a new stack
@@ -19,19 +23,17 @@ func NewTestStack() *Stack {
 }
 
 func newStack() *Stack {
-	addCmd := make(chan interface{})
-	var cmds []interface{}
+	return &Stack{}
+}
 
-	go func(chan interface{}, []interface{}) {
-		select {
-		case cmd := <-addCmd:
-			cmds = append(cmds, cmd)
-		}
-	}(addCmd, cmds)
-
-	return &Stack{cmds, addCmd}
+func (s *Stack) Add(cmd Interpreter) {
+	s.cmds = append(s.cmds, cmd)
 }
 
 func (s *Stack) Interpret() error {
+	for _, cmd := range s.cmds {
+		cmd.Interpret()
+	}
+
 	return nil
 }

@@ -16,10 +16,15 @@ type NowCmd struct {
 	t *time.Time
 }
 
+func (c *NowCmd) Interpret() error {
+	*c.t = time.Now()
+	return nil
+}
+
 // Now provides the current time
 func (c *TimeCmds) Now() time.Time {
 	t := new(time.Time)
-	c.stack.AddCmd <- NowCmd{t}
+	c.stack.Add(&NowCmd{t})
 	return *t
 }
 

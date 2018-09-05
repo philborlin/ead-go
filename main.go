@@ -13,7 +13,7 @@ func main() {
 
 	i := rnd.Int()
 	t := time.Now()
-	log.Info("Rand: %d @ %v", i, t)
+	log.Info("Rand: %d @ %v\n", i, t)
 
 	stack.Interpret()
 }

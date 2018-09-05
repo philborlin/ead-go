@@ -1,6 +1,9 @@
 package cmds
 
-import "github.com/philborlin/ead/stack"
+import (
+	"github.com/philborlin/ead/stack"
+	log "github.com/sirupsen/logrus"
+)
 
 // LoggingCmds represents a Kafka command creator
 type LoggingCmds struct {
@@ -13,9 +16,14 @@ type InfoCmd struct {
 	a      []interface{}
 }
 
+func (c *InfoCmd) Interpret() error {
+	log.Infof(c.format, c.a...)
+	return nil
+}
+
 // Info logs at the info level
 func (c *LoggingCmds) Info(format string, a ...interface{}) {
-	c.stack.AddCmd <- InfoCmd{format, a}
+	c.stack.Add(&InfoCmd{format, a})
 }
 
 // NewLoggingCmds creates a LoggingCmds
