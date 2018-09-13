@@ -12,9 +12,9 @@ func main() {
 	i := rand.Int()
 	t := time.Now()
 
-	sys.Eif(func() bool { return t.Second()%2 == 0 }, func() {
+	sys.If(func() bool { return t.Second()%2 == 0 }, func() {
 		log.Info("Even Rand: %d @ %v\n", i, t)
-	}).Eelse(func() {
+	}).Else(func() {
 		log.Info("Odd Rand: %d @ %v\n", i, t)
 	})
 

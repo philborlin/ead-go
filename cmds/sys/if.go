@@ -17,19 +17,19 @@ type IfBlock struct {
 	ifCmd *IfCmd
 }
 
-func Eif(conditional func() bool, block func()) *IfBlock {
+func If(conditional func() bool, block func()) *IfBlock {
 	ifCmd := &IfCmd{}
 	addCmd(ifCmd, conditional, block)
 	stack.Add(ifCmd)
 	return &IfBlock{ifCmd: ifCmd}
 }
 
-func (b *IfBlock) EelseIf(conditional func() bool, block func()) *IfBlock {
+func (b *IfBlock) ElseIf(conditional func() bool, block func()) *IfBlock {
 	addCmd(b.ifCmd, conditional, block)
 	return b
 }
 
-func (b *IfBlock) Eelse(block func()) {
+func (b *IfBlock) Else(block func()) {
 	addCmd(b.ifCmd, func() bool { return true }, block)
 }
 
