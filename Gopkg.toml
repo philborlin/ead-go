@@ -32,3 +32,11 @@
 [[constraint]]
   name = "github.com/sirupsen/logrus"
   version = "1.0.6"
+
+[[constraint]]
+  name = "github.com/dave/jennifer"
+  version = "1.0.2"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/tylerb/gls"
