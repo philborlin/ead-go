@@ -61,8 +61,9 @@ func Interpret() error {
 	b := s.stack.pop()
 
 	var err error
-	for _, cmd := range b.cmds {
-		err = cmd.Interpret()
+	// DeferCmd may add cmds during iteration. for/range does not support this
+	for i := 0; i < len(b.cmds); i++ {
+		err = b.cmds[i].Interpret()
 		if err != nil {
 			break
 		}
