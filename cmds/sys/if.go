@@ -53,6 +53,7 @@ func (c *IfCmd) Interpret() error {
 			if err != nil {
 				return err
 			}
+			return nil
 		}
 	}
 

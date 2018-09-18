@@ -39,6 +39,7 @@ func (c *SwitchCmd) Interpret() error {
 			if err != nil {
 				return err
 			}
+			return nil
 		}
 	}
 
